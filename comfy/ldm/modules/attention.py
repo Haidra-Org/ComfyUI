@@ -922,7 +922,7 @@ class SpatialTransformer(nn.Module):
             x = self.proj_in(x)
         for i, block in enumerate(self.transformer_blocks):
             transformer_options["block_index"] = i
-            x = block(x, context=context[i], transformer_options=transformer_options)
+            x = block(x, context=context[i])
         if self.use_linear:
             x = self.proj_out(x)
         x = x.reshape(x.shape[0], h, w, x.shape[-1]).movedim(3, 1).contiguous()
